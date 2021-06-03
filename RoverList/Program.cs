@@ -77,6 +77,8 @@ namespace RoverList
 
             list.Clear();
 
+            list.ListNodes();
+
 
 
             // TODO:  Implement the RoverList class
@@ -95,6 +97,10 @@ namespace RoverList
 
             // TODO:  Clear the list
             // TODO:  Print out the list
+            String word2 = Console.ReadLine();
+            //String nextWord3 = chain.GetNextWord(word);
+            //Console.WriteLine("I predict the next word will be ");
+            String line2222 = Console.ReadLine();
         }
     }
 }
