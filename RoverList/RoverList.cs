@@ -8,43 +8,127 @@ namespace RoverList
 {
     public class RoverList<T> : RoverListBase<T>
     {
-        // Add any variables you need here
-        
-        public RoverList ()
+        private int count;
+        public RoverList()
         {
+            count = 0;
+        }
+        public int wordNum()
+        {
+            current = head;
+            int wordCounter = 0;
 
+            while (current.Next != null)
+            {
+                wordCounter = wordCounter + 1;
+                current = current.Next;
+            }
+
+            wordCounter = wordCounter + 1;
+            return count;
         }
 
-        public override int Count => throw new NotImplementedException();
-
+        public override int Count
+        {
+            get
+            {
+                return count;
+            }
+        }
         public override void Add(T data)
         {
-            throw new NotImplementedException();
+            Node n = new Node(data);
+            if (head == null)
+            {
+                head = n;
+            }
+            else
+            {
+                current = head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                current.Next = n;
+            }
+            count++;
         }
 
         public override void Add(int Position, T data)
         {
-            throw new NotImplementedException();
-        }
 
+            Node temp = new Node(data);
+            current = head;
+            int pos = 0;
+            if (Position == 0)
+            {
+                head = temp;
+                temp.Next = current;
+                return;
+            }
+            while (pos != Position && current != null)
+            {
+                if (pos == Position - 1)
+                {
+                    temp.Next = current.Next;
+                    current.Next = temp;
+                }
+                current = current.Next;
+                pos++;
+            }
+
+
+        }
         public override void Clear()
         {
-            throw new NotImplementedException();
+            head = null;
+
         }
 
         public override T ElementAt(int Position)
         {
-            throw new NotImplementedException();
+
+            if (Position < 0 || Position >= this.wordNum())
+            {
+                return default(T);
+            }
+            current = head;
+            if (Position == 0)
+            {
+                return current.Data;
+            }
+            for (int i = 0; i < Position; i++)
+            {
+                current = current.Next;
+            }
+            return current.Data;
         }
 
         public override void ListNodes()
         {
-            throw new NotImplementedException();
+            current = head;
+            while (current != null)
+            {
+                Console.WriteLine("-" + current.Data);
+                current = current.Next;
+            }
         }
 
         public override bool RemoveAt(int Position)
         {
-            throw new NotImplementedException();
+            current = head;
+            if (Position == 0)
+            {
+                head = current.Next;
+                return true;
+            }
+            else
+            {
+                for (int i = 0; i < Position - 1; i++)
+                    current = current.Next;
+                current.Next = current.Next.Next;
+            }
+            return true;
         }
     }
 }
